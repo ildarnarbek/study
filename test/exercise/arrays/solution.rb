@@ -14,30 +14,27 @@ module Exercise
       end
 
       def search(_array, _query)
-	middle_index =(_array.length/2).ceil
-	middle_item = _array[middle_index]
+	@left = -1
+	@right = _array.length
 	last_index = _array.length-1
 	last_item = _array[last_index]
-	puts "#{_array} q = #{_query} length #{_array.length}"
-	puts "middle_index= #{middle_index} midle_item = #{middle_item} last_item = #{last_item}"
-	#  puts "return -1"
-	  return -1 if _array.length == 0 or last_item < _query
-	#  puts "return #{middle_index}"
-	 
-	  if middle_item > _query
-	    puts "> #{_array.slice(0,middle_index)}"
-	    new_middle_index = search(_array[0..middle_index],_query)
-	    puts " new_middle #{new_middle} middle #{middle_item}"
-	    return middle_index - new_middle_index
-	  elsif middle_item == _query
-	    return middle_index
-	  else 	
-	   puts "< #{_array.slice(middle_index,last_index)}" 
-           new_middle_index = search(_array[middle_index..last_index],_query)
- 
-
+	puts " \n #{_array[0..10]} q= #{_query} l= #{@left} r =#{@right} last #{_array[-1]}"
+	return -1 if _array.length == 0 or last_item < _query
+	while @left < @right - 1
+	puts "start l = #{@left} r = #{@right}"  
+	@middle_index = (@left+@right)/2.ceil	
+	if _array[@middle_index] < _query    
+	@left = @middle_index
+	puts "middle_index #{@middle_index} .. middle_item #{_array[@middle_index]} < #{_query} l = #{@left}"
+	else	 
+	@right = @middle_index
+	puts "middle_index #{@middle_index} .. middle_item #{_array[@middle_index]} > #{_query} r= #{@right}"
 	end
-      end
+	puts "end l = #{@left} r= #{@right}"
+	end
+	return _array[@right] == _query ? @right : -1
+	
+	end
     end
   end
 end
