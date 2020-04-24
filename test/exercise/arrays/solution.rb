@@ -13,27 +13,18 @@ module Exercise
       end
 
       def search(array, query)
-        bin_search = Proc.new {|array, query, left, right|
-          middle_index = (left+right)/2.ceil
-          puts "\n array = #{array[0..10]} query = #{query} \n left = #{left} right = #{right} \n middle #{middle_index} array[#{middle_index}] = #{array[middle_index]} "
-          if  array.length < 1 || array[right-1] < query
-            puts "ret -1"
-            return -1
-          end
-          if array[middle_index] == query
-            puts "ret #{middle_index}"
-            return middle_index
-            end
+        bin_search = proc { |array, query, left, right|
+          middle_index = (left + right) / 2.ceil
+          return -1 if array.empty? || array[right - 1] < query
+          return middle_index if array[middle_index] == query
 
           if array[middle_index] < query
-            puts "#{array[middle_index]} < #{query}"
-            bin_search.call(array,query,middle_index,right)   
+            bin_search.call(array, query, middle_index, right)
           else
-            puts "#{array[middle_index]} > #{query}"
-            bin_search.call(array,query,left,middle_index)
+            bin_search.call(array, query, left, middle_index)
           end
-          }
-          bin_search.call(array,query,-1,array.length)
+        }
+        bin_search.call(array, query, -1, array.length)
       end
     end
   end
