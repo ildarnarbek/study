@@ -2,11 +2,15 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        @new_array = []
+        new_array = []
+        max_item = array[0]
         array.each do |item|
-          @new_array << (item.positive? ? array.max : item)
+          max_item = item if item > max_item
         end
-        @new_array
+        array.each do |item|
+          new_array << (item.positive? ? max_item : item)
+        end
+        new_array
       end
 
       def search(array, query)
