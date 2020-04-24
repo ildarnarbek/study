@@ -10,21 +10,30 @@ module Exercise
         array.each do |item|
           new_array << (item.positive? ? max_item : item)
         end
-        new_array
       end
 
       def search(array, query)
-        @left = -1
-        @right = array.length
-        while @left < @right - 1
-          @middle_index = (@left + @right) / 2.ceil
-          if array[@middle_index] < query
-            @left = @middle_index
-          else
-            @right = @middle_index
+        bin_search = Proc.new {|array, query, left, right|
+          middle_index = (left+right)/2.ceil
+          puts "\n array = #{array[0..10]} query = #{query} \n left = #{left} right = #{right} \n middle #{middle_index} array[#{middle_index}] = #{array[middle_index]} "
+          if  array.length < 1 || array[right-1] < query
+            puts "ret -1"
+            return -1
           end
-        end
-        array[@right] == query ? @right : -1
+          if array[middle_index] == query
+            puts "ret #{middle_index}"
+            return middle_index
+            end
+
+          if array[middle_index] < query
+            puts "#{array[middle_index]} < #{query}"
+            bin_search.call(array,query,middle_index,right)   
+          else
+            puts "#{array[middle_index]} > #{query}"
+            bin_search.call(array,query,left,middle_index)
+          end
+          }
+          bin_search.call(array,query,-1,array.length)
       end
     end
   end
