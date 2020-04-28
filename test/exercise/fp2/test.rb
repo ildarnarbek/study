@@ -37,7 +37,7 @@ class Exercise::Fp2Test < Minitest::Test
     func = ->(element) { element if element.even? }
     func_another = ->(element) { element * @int }
     func_yet_another = ->(element) { element.even? }
-    puts "comp #{@array.map(&func).compact}" 
+    puts "\n comp #{@array.map(&func).compact}" 
     puts "mycomp #{@my_array.my_map(&func).my_compact}"
     assert @array.map(&func).compact == @my_array.my_map(&func).my_compact
     assert @array.map(&func).compact.map(&func_another) == @my_array.my_map(&func).my_compact.my_map(&func_another)
@@ -45,9 +45,13 @@ class Exercise::Fp2Test < Minitest::Test
   end
 
   def test_my_reduce
-    skip
-    func = ->(acc, element) { acc * element }
-
+      func = ->(acc, element) { acc * element }
+   puts "\n reduce &func #{@array.reduce(&func)} arr #{@my_array}"
+   puts "my reduce #{@my_array.my_reduce(&func)}"
+   puts "\n reduce 2, &func #{@array.reduce(2, &func)} arr #{@my_array}"
+   puts "my reduce #{@my_array.my_reduce(2, &func)}"
+   puts "\n reduce &:+ #{@array.reduce(&:+)} arr #{@my_array}"
+   puts "my reduce #{@my_array.my_reduce(&:+)}"
     assert @array.reduce(&func) == @my_array.my_reduce(&func)
     assert @array.reduce(2, &func) == @my_array.my_reduce(2, &func)
     assert @array.reduce(&:+) == @my_array.my_reduce(&:+)

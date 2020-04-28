@@ -27,7 +27,9 @@ module Exercise
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce; 
+      def my_reduce(acc = nil); 
+        self.my_each { |item| acc.nil? ? acc = item : acc = yield(acc, item)  }
+        acc
       end
     end
   end
