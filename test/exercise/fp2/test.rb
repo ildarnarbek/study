@@ -11,15 +11,15 @@ class Exercise::Fp2Test < Minitest::Test
   end
 
   def test_my_each
-    skip
     result = []
     my_result = []
-
+    puts "\n my array #{@my_array}"
     func = ->(element) { result << element if element.odd? }
     my_func = ->(element) { my_result << element if element.odd? }
 
     assert @array.each(&func) == @my_array.my_each(&my_func)
     assert result == my_result
+    puts "my_res #{my_result}  res #{result}"
   end
 
   def test_my_map
