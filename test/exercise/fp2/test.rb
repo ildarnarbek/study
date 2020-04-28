@@ -19,14 +19,17 @@ class Exercise::Fp2Test < Minitest::Test
 
     assert @array.each(&func) == @my_array.my_each(&my_func)
     assert result == my_result
-    puts "my_res #{my_result}  res #{result}"
+    # puts "my_res #{my_result}  res #{result}"
   end
 
   def test_my_map
-    skip
-    func = ->(element) { element * @int }
+    puts "int #{@int} @my_arr #{@my_array}"
+    func = ->(element) { element * @int } 
+    puts "1 #{@array.map(&func)}"
+    puts "2 #{@array.map(&func).map(&func)}"
     assert @array.map(&func) == @my_array.my_map(&func)
     assert @array.map(&func).map(&func) == @my_array.my_map(&func).my_map(&func)
+
   end
 
   def test_my_compact
