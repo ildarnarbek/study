@@ -20,10 +20,15 @@ module Exercise
       end
 
       # Написать свою функцию my_compact
-      def my_compact; end
+      def my_compact; 
+        result_array = MyArray.new
+        self.my_each{ |item| result_array << item if !item.nil?}
+        result_array
+      end
 
       # Написать свою функцию my_reduce
-      def my_reduce; end
+      def my_reduce; 
+      end
     end
   end
 end
