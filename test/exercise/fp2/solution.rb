@@ -5,30 +5,30 @@ module Exercise
       # Использовать свои написанные функции для реализации следующих - можно.
 
       # Написать свою функцию my_each
-      def my_each; 
-        for index in 0..self.length-1 do
+      def my_each
+        for index in 0..length - 1 do
           yield(self[index])
-        end 
+        end
         self
       end
 
       # Написать свою функцию my_map
-      def my_map; 
+      def my_map
         result_array = MyArray.new
-        self.my_each{ |item| result_array << yield(item)}
+        my_each { |item| result_array << yield(item) }
         result_array
       end
 
       # Написать свою функцию my_compact
-      def my_compact; 
+      def my_compact
         result_array = MyArray.new
-        self.my_each{ |item| result_array << item if !item.nil?}
+        my_each { |item| result_array << item unless item.nil? }
         result_array
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce(acc = nil); 
-        self.my_each { |item| acc.nil? ? acc = item : acc = yield(acc, item)  }
+      def my_reduce(acc = nil)
+        my_each { |item| acc = acc.nil? ? item : yield(acc, item) }
         acc
       end
     end
