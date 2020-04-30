@@ -28,21 +28,13 @@ module Exercise
         result_array
       end
 
-      def iter(acc, index, &block)
-        return acc if index == length
-
-        acc = acc.nil? ? self[index] : yield(acc, self[index])
-        iter(acc, index += 1, &block)
-      end
-
       # Написать свою функцию my_reduce
-      # def my_reduce(acc = nil, &block, index = 0)
-      def my_reduce(acc = nil, index = 0, &block )
-        # acc = iter(acc, 0, &block)
+      def my_reduce(acc = nil, index = 0, &iter)
         return acc if index == length
+
         acc = acc.nil? ? self[index] : yield(acc, self[index])
-        my_reduce(acc, index +=1, &block)
-        # acc
+        index += 1
+        my_reduce(acc, index, &iter)
       end
     end
   end
