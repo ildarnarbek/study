@@ -40,7 +40,9 @@ class Exercise::Fp2Test < Minitest::Test
 
   def test_my_reduce
     func = ->(acc, element) { acc * element }
-
+    puts "\n res #{@array.reduce(&func)} arr #{@my_array}"
+    puts "\n res #{@array.reduce(2, &func)} arr #{@my_array}"
+    puts "\n res #{@array.reduce(&:+)} arr #{@my_array}"
     assert @array.reduce(&func) == @my_array.my_reduce(&func)
     assert @array.reduce(2, &func) == @my_array.my_reduce(2, &func)
     assert @array.reduce(&:+) == @my_array.my_reduce(&:+)
