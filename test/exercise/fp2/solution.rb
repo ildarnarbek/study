@@ -29,34 +29,20 @@ module Exercise
       end
 
       def iter(acc, index, &block)
-        puts "\n \n enter acc #{acc} index #{index}"
         return acc if index == length
 
-        # if acc.nil?
-        #   acc = self[index]
-        #   index = 1
-        # else
-        #   acc = acc
-        # end
-
-        # index = 1 if acc.nil?
-        # acc = self[0] if acc.nil?
-
-        acc.nil? ? acc = self[index] : acc = yield(acc, self[index])
-
-        puts "\n def acc #{acc} index #{index}"
-        puts "\n operation acc index #{acc} * #{self[index]}"
-        # acc = yield(acc, self[index])
-        puts "res #{acc}"
-        puts "\n end iter \n"
+        acc = acc.nil? ? self[index] : yield(acc, self[index])
         iter(acc, index += 1, &block)
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce(acc = nil, &block)
-        acc = iter(acc, 0, &block)
-        puts "\n end reduce  acc #{acc}"
-        acc
+      # def my_reduce(acc = nil, &block, index = 0)
+      def my_reduce(acc = nil, index = 0, &block )
+        # acc = iter(acc, 0, &block)
+        return acc if index == length
+        acc = acc.nil? ? self[index] : yield(acc, self[index])
+        my_reduce(acc, index +=1, &block)
+        # acc
       end
     end
   end
