@@ -15,13 +15,13 @@ module Exercise
       # Написать свою функцию my_map
       def my_map
         iter = ->(acc, item) { acc << yield(item) }
-        my_reduce(MyArray.new, index = 0, &iter)
+        my_reduce(MyArray.new, &iter)
       end
 
       # Написать свою функцию my_compact
       def my_compact
         iter = ->(acc, item) { item.nil? ? acc : acc << item }
-        my_reduce(MyArray.new, index = 0, &iter)
+        my_reduce(MyArray.new, &iter)
       end
 
       # Написать свою функцию my_reduce
