@@ -14,18 +14,14 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map
-        # через reduce
-        result_array = MyArray.new
-        my_each { |item| result_array << yield(item) }
-        result_array
+        iter = ->(acc, item) { acc << yield(item) }
+        my_reduce(MyArray.new, index = 0, &iter)
       end
 
       # Написать свою функцию my_compact
       def my_compact
-        # через reduce
-        result_array = MyArray.new
-        my_each { |item| result_array << item unless item.nil? }
-        result_array
+        iter = ->(acc, item) { item.nil? ? acc : acc << item }
+        my_reduce(MyArray.new, index = 0, &iter)
       end
 
       # Написать свою функцию my_reduce
